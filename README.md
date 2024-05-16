@@ -4,7 +4,7 @@
 
 #### Task
 
-- [ ] 多线程并行计算汇总所有结果
+- [X] 多线程并行计算汇总所有结果
 
 #### features
 
@@ -23,7 +23,7 @@
 
 ```bash
 sudo apt install libopencv-dev  # Linux需要安装opencv，Windows不需要配置依赖
-git submodule add https://gt.xtad.cn:7571/common/calibrate.git 3rdparty/
+git submodule add https://gt.xtad.cn:7571/common/calibrate.git
 git submodule update
 ```
 

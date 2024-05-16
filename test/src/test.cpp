@@ -4,6 +4,8 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
+#include <spdlog/spdlog.h>
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -147,9 +149,16 @@ void test() {
 
 int main() {
 
+    spdlog::info("Hello, {}!", "world");
+    spdlog::warn("This is a warning!");
+    spdlog::error("This is an error!");
+    spdlog::critical("Critical error with number: {}", 42);
+    spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e %l %n %v");
+    spdlog::info("Custom pattern log example");
+
     // test34();
     // testWeiChai();
-    testJieFang();
+    // testJieFang();
     // test();
 
     return 0;
