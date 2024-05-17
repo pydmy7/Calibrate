@@ -298,7 +298,7 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
         if (!leaderid.count(dsu.leader(i))) {
             leaderid.emplace(dsu.leader(i), id++);
         }
-        while (chessboards.size() <= leaderid.at(dsu.leader(i))) {
+        while (static_cast<int>(chessboards.size()) <= leaderid.at(dsu.leader(i))) {
             chessboards.emplace_back();
         }
         for (int j = 0; j < 4; ++j) {

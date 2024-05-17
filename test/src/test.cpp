@@ -40,7 +40,7 @@ void testWeiChai() {
 
             int idx = 0;
             for (const auto& corners : chessboards) {
-                for (int j = 0; j < corners.size(); ++j) {
+                for (int j = 0; j < static_cast<int>(corners.size()); ++j) {
                     cv::putText(image, std::to_string(idx++), corners[j], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
                     // std::cout << corners[j] << " \n"[j == corners.size() - 1];
                 }
@@ -71,9 +71,9 @@ void testJieFang() {
 
             int idx = 0;
             for (const auto& corners : chessboards) {
-                for (int j = 0; j < corners.size(); ++j) {
+                for (int j = 0; j < static_cast<int>(corners.size()); ++j) {
                     cv::putText(image, std::to_string(idx++), corners[j], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
-                    std::cout << corners[j] << " \n"[j == corners.size() - 1];
+                    std::cout << corners[j] << " \n"[j == static_cast<int>(corners.size()) - 1];
                 }
             }
             cv::imshow(filepath, image);
@@ -108,9 +108,9 @@ void test34() {
 
         int idx = 0;
         for (const auto& corners : chessboards) {
-            for (int j = 0; j < corners.size(); ++j) {
+            for (int j = 0; j < static_cast<int>(corners.size()); ++j) {
                 cv::putText(image, std::to_string(idx++), corners[j], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
-                std::cout << corners[j] << " \n"[j == corners.size() - 1];
+                std::cout << corners[j] << " \n"[j == static_cast<int>(corners.size()) - 1];
             }
         }
         // cv::imshow(filepath, image);
@@ -136,9 +136,9 @@ void test() {
 
         int idx = 0;
         for (const auto& corners : chessboards) {
-            for (int j = 0; j < corners.size(); ++j) {
+            for (int j = 0; j < static_cast<int>(corners.size()); ++j) {
                 cv::putText(image, std::to_string(idx++), corners[j], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
-                std::cout << corners[j] << " \n"[j == corners.size() - 1];
+                std::cout << corners[j] << " \n"[j == static_cast<int>(corners.size()) - 1];
             }
         }
         cv::imshow(filepath, image);

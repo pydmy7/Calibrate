@@ -59,6 +59,7 @@ ChessboardType ChessboardCornerCntToChessboardType(int cnt) {
 
 namespace {
 
+[[maybe_unused]]
 std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType chessboardtype) {
     if (chessboardtype == cornersort::ChessboardType::twomultwo) {
         return {2, 2};
@@ -71,6 +72,7 @@ std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType
     }
 }
 
+[[maybe_unused]]
 void sortCorners(std::vector<cv::Point>& corners, cornersort::CameraPosition cameraposition) {
     cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
 
@@ -103,6 +105,7 @@ void sortCorners(std::vector<cv::Point>& corners, cornersort::CameraPosition cam
     }
 }
 
+[[maybe_unused]]
 void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
     auto getFarthesTowPoint = [](const std::vector<cv::Point>& points, geometry::Line<int> line) -> std::pair<cv::Point, cv::Point> {
         std::vector<std::pair<cv::Point, double>> res;
@@ -163,6 +166,7 @@ void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
     corners = std::move(newcorners);
 }
 
+[[maybe_unused]]
 void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
         return lhs.y < rhs.y || (lhs.y == rhs.y && lhs.x < rhs.x);
@@ -174,6 +178,7 @@ void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
     }
 }
 
+[[maybe_unused]]
 void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
         return lhs.y < rhs.y || (lhs.y == rhs.y && lhs.x < rhs.x);
@@ -185,6 +190,7 @@ void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
     }
 }
 
+[[maybe_unused]]
 std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points) {
     double maxdist = 0;
     std::pair<cv::Point, cv::Point> res;
@@ -200,6 +206,7 @@ std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point
     return res;
 }
 
+[[maybe_unused]]
 cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points) {
     double closestdist = geometry::getDistance(p, points[0]);
     cv::Point closestpoint = points[0];
@@ -213,6 +220,7 @@ cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& poin
     return closestpoint;
 }
 
+[[maybe_unused]]
 void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
     cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
     const auto [row, col] = getChessboardSizeByChessboardType(chessboardtype);
@@ -235,6 +243,7 @@ void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
     }
 }
 
+[[maybe_unused]]
 void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix) {
     const int n = matrix.size();
     for (int i = 0; i < n / 2; ++i) {
