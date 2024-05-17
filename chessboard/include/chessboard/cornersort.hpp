@@ -1,10 +1,12 @@
 #pragma once
 
+
 #include <opencv2/core/types.hpp>
 
 #include <vector>
 #include <unordered_map>
 #include <utility>
+
 
 namespace cornersort {
 
@@ -31,19 +33,22 @@ void areaCornerSort(std::vector<std::vector<cv::Point>>& areas, CameraPosition c
 
 ChessboardType ChessboardCornerCntToChessboardType(int cnt);
 
-// -----------------------------------------------------------------------------------------------------------
+}  // namespace cornersort
 
-static std::pair<int, int> getChessboardSizeByChessboardType(ChessboardType chessboardtype);
 
-static void sortCorners(std::vector<cv::Point>& corners, CameraPosition cameraposition);
-static void sortCornersForThreeMulThree(std::vector<cv::Point>& corners);
-static void sortCornersForThreeMulFour(std::vector<cv::Point>& corners);
-static void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners);
+namespace {
 
-static std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points);
-static cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points);
+std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType chessboardtype);
 
-static void rotateByMatrix(std::vector<cv::Point>& corners, int cnt);
-static void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix);
+void sortCorners(std::vector<cv::Point>& corners, cornersort::CameraPosition cameraposition);
+void sortCornersForThreeMulThree(std::vector<cv::Point>& corners);
+void sortCornersForThreeMulFour(std::vector<cv::Point>& corners);
+void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners);
 
-}
+std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points);
+cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points);
+
+void rotateByMatrix(std::vector<cv::Point>& corners, int cnt);
+void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix);
+
+}  // namespace

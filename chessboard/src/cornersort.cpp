@@ -1,9 +1,11 @@
 #include "chessboard/cornersort.hpp"
 
+
 #include "chessboard/geometry.hpp"
 
 #include <numeric>
 #include <algorithm>
+
 
 namespace cornersort {
 
@@ -52,53 +54,56 @@ ChessboardType ChessboardCornerCntToChessboardType(int cnt) {
     }
 }
 
-// -----------------------------------------------------------------------------------------------------------
+}  // namespace cornersort
 
-static std::pair<int, int> getChessboardSizeByChessboardType(ChessboardType chessboardtype) {
-    if (chessboardtype == ChessboardType::twomultwo) {
+
+namespace {
+
+std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType chessboardtype) {
+    if (chessboardtype == cornersort::ChessboardType::twomultwo) {
         return {2, 2};
-    } else if (chessboardtype == ChessboardType::threemulthree) {
+    } else if (chessboardtype == cornersort::ChessboardType::threemulthree) {
         return {3, 3};
-    } else if (chessboardtype == ChessboardType::threemulfour) {
+    } else if (chessboardtype == cornersort::ChessboardType::threemulfour) {
         return {3, 4};
     } else {
         return {0, 0};
     }
 }
 
-static void sortCorners(std::vector<cv::Point>& corners, CameraPosition cameraposition) {
-    ChessboardType chessboardtype = ChessboardCornerCntToChessboardType(corners.size());
+void sortCorners(std::vector<cv::Point>& corners, cornersort::CameraPosition cameraposition) {
+    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
 
-    if (chessboardtype == ChessboardType::threemulthree) {
+    if (chessboardtype == cornersort::ChessboardType::threemulthree) {
         sortCornersForThreeMulThree(corners);
-    } else if (chessboardtype == ChessboardType::threemulfour) {
+    } else if (chessboardtype == cornersort::ChessboardType::threemulfour) {
         sortCornersForThreeMulFour(corners);
         return;
-    } else if (chessboardtype == ChessboardType::twomultwo) {
+    } else if (chessboardtype == cornersort::ChessboardType::twomultwo) {
         sortCornersForTwoMulTwo(corners);
     } else {
         return;
     }
 
-    if (cameraposition == CameraPosition::left \
-        || cameraposition == CameraPosition::frontleft \
-        || cameraposition == CameraPosition::rearleft
+    if (cameraposition == cornersort::CameraPosition::left \
+        || cameraposition == cornersort::CameraPosition::frontleft \
+        || cameraposition == cornersort::CameraPosition::rearleft
     ) {
         rotateByMatrix(corners, 3);
     } else if (
-        cameraposition == CameraPosition::right \
-        || cameraposition == CameraPosition::frontright \
-        || cameraposition == CameraPosition::rearright
+        cameraposition == cornersort::CameraPosition::right \
+        || cameraposition == cornersort::CameraPosition::frontright \
+        || cameraposition == cornersort::CameraPosition::rearright
     ) {
         rotateByMatrix(corners, 1);
-    } else if (cameraposition == CameraPosition::rear) {
+    } else if (cameraposition == cornersort::CameraPosition::rear) {
         std::reverse(corners.begin(), corners.end());
     } else {
-        // assert(cameraposition == CameraPosition::front || cameraposition == CameraPosition::none);
+        // assert(cameraposition == cornersort::CameraPosition::front || cameraposition == cornersort::CameraPosition::none);
     }
 }
 
-static void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
+void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
     auto getFarthesTowPoint = [](const std::vector<cv::Point>& points, geometry::Line<int> line) -> std::pair<cv::Point, cv::Point> {
         std::vector<std::pair<cv::Point, double>> res;
         for (const cv::Point& point : points) {
@@ -158,7 +163,7 @@ static void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
     corners = std::move(newcorners);
 }
 
-static void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
+void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
         return lhs.y < rhs.y || lhs.y == rhs.y && lhs.x < rhs.x;
     });
@@ -169,7 +174,7 @@ static void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
     }
 }
 
-static void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
+void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
         return lhs.y < rhs.y || lhs.y == rhs.y && lhs.x < rhs.x;
     });
@@ -180,7 +185,7 @@ static void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
     }
 }
 
-static std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points) {
+std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points) {
     double maxdist = 0;
     std::pair<cv::Point, cv::Point> res;
     for (int n = points.size(), i = 0; i < n; ++i) {
@@ -195,7 +200,7 @@ static std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv
     return res;
 }
 
-static cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points) {
+cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points) {
     double closestdist = geometry::getDistance(p, points[0]);
     cv::Point closestpoint = points[0];
     for (std::size_t i = 1; i < points.size(); ++i) {
@@ -208,8 +213,8 @@ static cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point
     return closestpoint;
 }
 
-static void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
-    ChessboardType chessboardtype = ChessboardCornerCntToChessboardType(corners.size());
+void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
+    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
     const auto [row, col] = getChessboardSizeByChessboardType(chessboardtype);
     std::vector<std::vector<cv::Point>> matrix(row, std::vector<cv::Point>(col));
 
@@ -230,7 +235,7 @@ static void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
     }
 }
 
-static void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix) {
+void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix) {
     const int n = matrix.size();
     for (int i = 0; i < n / 2; ++i) {
         for (int j = 0; j < (n + 1) / 2; ++j) {
@@ -240,4 +245,4 @@ static void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix) {
     }
 }
 
-}
+}  // namespace

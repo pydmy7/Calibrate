@@ -11,51 +11,51 @@ namespace geometry {
 
 // ------------------------------------------------------------ Point
 
-template<class T>
+template<typename T>
 using Point = cv::Point_<T>;
 
-template<class T>
+template<typename T>
 int sgn(Point<T> a) {
     return a.y > 0 || (a.y == 0 && a.x > 0) ? 1 : -1;
 }
 
-template<class T>
+template<typename T>
 T dot(Point<T> a, Point<T> b) {
     return a.x * b.x + a.y * b.y;
 }
 
-template<class T>
+template<typename T>
 T cross(Point<T> a, Point<T> b) {
     return a.x * b.y - a.y * b.x;
 }
 
-template<class T>
+template<typename T>
 T square(Point<T> p) {
     return dot(p, p);
 }
 
-template<class T>
+template<typename T>
 double length(Point<T> p) {
     return std::sqrt(double(square(p)));
 }
 
-template<class T>
+template<typename T>
 Point<T> normalize(Point<T> p) {
     return p / length(p);
 }
 
-template<class T>
+template<typename T>
 double angle(Point<T> a, Point<T> b) {
     return std::acos(1.0 * dot(a, b) / length(a) / length(b));
 }
 
-template<class T>
+template<typename T>
 double getDistance(const Point<T>& a, const Point<T>& b) {
     double dx = a.x - b.x, dy = a.y - b.y;
     return std::sqrt(dx * dx + dy * dy);
 }
 
-template<class T>
+template<typename T>
 Point<T> getCentralPoint(const std::vector<Point<T>>& points) {
     if (points.empty()) {
         return {};
@@ -67,31 +67,31 @@ Point<T> getCentralPoint(const std::vector<Point<T>>& points) {
 
 // ------------------------------------------------------------ Line
 
-template<class T>
+template<typename T>
 struct Line {
     Point<T> a, b;
     Line(Point<T> a_ = Point<T>(), Point<T> b_ = Point<T>()) : a(a_), b(b_) {}
 };
 
-template<class T>
+template<typename T>
 bool pointOnLineLeft(Point<T> p, Line<T> l) {
     return cross(l.b - l.a, p - l.a) > 0;
 }
 
-template<class T>
+template<typename T>
 double pointToLineDistance(Point<T> p, Line<T> l) {
     return std::fabs(1.0 * cross(l.b - l.a, p - l.a) / length(l.b - l.a));
 }
 
 constexpr long double eps = 1E-8;
 
-template<class T>
+template<typename T>
 bool pointOnSegment(Point<T> p, Line<T> l) {
     return std::abs(cross(p - l.a, l.b - l.a)) < eps && std::min(l.a.x, l.b.x) < p.x + eps && p.x - eps < std::max(l.a.x, l.b.x)
         && std::min(l.a.y, l.b.y) < p.y + eps && p.y - eps < std::max(l.a.y, l.b.y);
 }
 
-template<class T>
+template<typename T>
 Point<T> lineIntersection(Line<T> l1, Line<T> l2) {
     return l1.a + (l1.b - l1.a) * (cross(l2.b - l2.a, l1.a - l2.a) / cross(l2.b - l2.a, l1.a - l1.b));
 }
@@ -100,7 +100,7 @@ Point<T> lineIntersection(Line<T> l1, Line<T> l2) {
 // 1 : strictly intersect  严格相交
 // 2 : overlap  重叠
 // 3 : intersect at endpoint  在端点相交
-template<class T>
+template<typename T>
 std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) {
     if (std::max(l1.a.x, l1.b.x) < std::min(l2.a.x, l2.b.x)) {
         return {0, Point<T>(), Point<T>()};
@@ -159,7 +159,7 @@ std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) 
 
 // ------------------------------------------------------------ Polygon
 
-template<class T>
+template<typename T>
 double polygonArea(const std::vector<Point<T>>& points) {
     if (points.size() < 3) {
         return 0.0;
@@ -171,7 +171,7 @@ double polygonArea(const std::vector<Point<T>>& points) {
     return area / 2.0;
 }
 
-template<class T>
+template<typename T>
 std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
     std::vector<Point<T>> h, l;
     std::sort(p.begin(), p.end(), [&](auto a, auto b) {
@@ -204,7 +204,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
     return l;
 }
 
-template<class T>
+template<typename T>
 bool pointInPolygon(const Point<T>& a, const std::vector<Point<T>>& p) {
     int n = p.size();
     for (int i = 0; i < n; i++) {
@@ -228,7 +228,7 @@ bool pointInPolygon(const Point<T>& a, const std::vector<Point<T>>& p) {
     return t == 1;
 }
 
-template<class T>
+template<typename T>
 bool segmentInPolygon(Line<T> l, std::vector<Point<T>> p) {
     int n = p.size();
     if (!pointInPolygon(l.a, p)) {
@@ -305,7 +305,7 @@ bool segmentInPolygon(Line<T> l, std::vector<Point<T>> p) {
     return true;
 }
 
-template<class T>
+template<typename T>
 bool polygonInPolygon(std::vector<Point<T>> polygon1, std::vector<Point<T>> polygon2) {
     if (polygonArea(polygon1) > polygonArea(polygon2)) {
         std::swap(polygon1, polygon2);
@@ -315,7 +315,7 @@ bool polygonInPolygon(std::vector<Point<T>> polygon1, std::vector<Point<T>> poly
     });
 }
 
-template<class T>
+template<typename T>
 std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
     std::sort(lines.begin(), lines.end(), [&](auto l1, auto l2) {
         auto d1 = l1.b - l1.a;
