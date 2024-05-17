@@ -7,11 +7,11 @@ DSU::DSU(int n) {
     init(n);
 }
 
-void DSU::init(int n) {
-    this->n = n;
-    this->cnt = n;
-    sz.assign(n, 1);
-    p.resize(n);
+void DSU::init(int n_) {
+    this->n = n_;
+    this->cnt = n_;
+    sz.assign(n_, 1);
+    p.resize(n_);
     std::iota(p.begin(), p.end(), 0);
 }
 

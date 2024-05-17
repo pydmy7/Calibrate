@@ -12,6 +12,13 @@ macro(addExecutable target)
 
     target_include_directories(${target} PRIVATE include)
     target_compile_features(${target} PRIVATE cxx_std_17)
+    
+    if(MSVC)
+        target_compile_options(${target} PRIVATE /W4)
+    else()
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
 endmacro(addExecutable)
 
 
@@ -30,4 +37,11 @@ macro(addLibrary target)
 
     target_include_directories(${target} PUBLIC include)
     target_compile_features(${target} PRIVATE cxx_std_17)
+
+    if(MSVC)
+        target_compile_options(${target} PRIVATE /W4)
+    else()
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
 endmacro(addLibrary)

@@ -164,8 +164,8 @@ double polygonArea(const std::vector<Point<T>>& points) {
     if (points.size() < 3) {
         return 0.0;
     }
-    long double area = 0.0;
-    for (int n = points.size(), i = 0; i < n; ++i) {
+    double area = 0.0;
+    for (int n = static_cast<int>(points.size()), i = 0; i < n; ++i) {
         area += cross(points[i], points[(i + 1) % n]);
     }
     return area / 2.0;
@@ -206,7 +206,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
 
 template<typename T>
 bool pointInPolygon(const Point<T>& a, const std::vector<Point<T>>& p) {
-    int n = p.size();
+    int n = static_cast<int>(p.size());
     for (int i = 0; i < n; i++) {
         if (pointOnSegment(a, Line(p[i], p[(i + 1) % n]))) {
             return true;

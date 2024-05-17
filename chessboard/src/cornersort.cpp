@@ -74,7 +74,7 @@ std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType
 
 [[maybe_unused]]
 void sortCorners(std::vector<cv::Point>& corners, cornersort::CameraPosition cameraposition) {
-    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
+    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(static_cast<int>(corners.size()));
 
     if (chessboardtype == cornersort::ChessboardType::threemulthree) {
         sortCornersForThreeMulThree(corners);
@@ -194,7 +194,7 @@ void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
 std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point>& points) {
     double maxdist = 0;
     std::pair<cv::Point, cv::Point> res;
-    for (int n = points.size(), i = 0; i < n; ++i) {
+    for (int n = static_cast<int>(points.size()), i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
             double curdist = geometry::getDistance(points[i], points[j]);
             if (curdist > maxdist) {
@@ -222,7 +222,7 @@ cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& poin
 
 [[maybe_unused]]
 void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
-    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(corners.size());
+    cornersort::ChessboardType chessboardtype = cornersort::ChessboardCornerCntToChessboardType(static_cast<int>(corners.size()));
     const auto [row, col] = getChessboardSizeByChessboardType(chessboardtype);
     std::vector<std::vector<cv::Point>> matrix(row, std::vector<cv::Point>(col));
 
@@ -245,7 +245,7 @@ void rotateByMatrix(std::vector<cv::Point>& corners, int cnt) {
 
 [[maybe_unused]]
 void rotateMatrix(std::vector<std::vector<cv::Point>>& matrix) {
-    const int n = matrix.size();
+    const int n = static_cast<int>(matrix.size());
     for (int i = 0; i < n / 2; ++i) {
         for (int j = 0; j < (n + 1) / 2; ++j) {
             std::tie(matrix[i][j], matrix[n - j - 1][i], matrix[n - i - 1][n - j - 1], matrix[j][n - i - 1])

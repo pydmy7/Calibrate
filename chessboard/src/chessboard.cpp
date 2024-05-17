@@ -95,7 +95,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
     });
 
     std::vector<std::vector<cv::Point>> newchessboards;
-    for (int n = chessboards.size(), i = 0; i < n; ++i) {
+    for (int n = static_cast<int>(chessboards.size()), i = 0; i < n; ++i) {
         // ---------------------------------------------------
         auto isSameChessboard = [&chessboards](int a, int b) -> bool {
             cv::Point pa = geometry::getCentralPoint(chessboards[a]);
@@ -145,7 +145,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
     chessboards = std::move(newchessboards);
 
     if (chessboards.size() < patternsizes_.size()) {
-        for (int cnt = patternsizes_.size(), i = 0; i < cnt; ++i) {
+        for (int cnt = static_cast<int>(patternsizes_.size()), i = 0; i < cnt; ++i) {
             if (patternsizes_[i] == pii{2, 2}) {
                 continue;
             }
@@ -225,7 +225,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getQuads(const cv::Mat& threshma
     std::vector<std::vector<cv::Point>> contours;
     cv::findContours(threshmat, contours, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
 
-    int minarea = std::round(threshmat.cols * threshmat.rows * (0.03 * 0.01 * 0.92) * 0.1);
+    int minarea = static_cast<int>(std::round(threshmat.cols * threshmat.rows * (0.03 * 0.01 * 0.92) * 0.1));
 
     std::vector<std::vector<cv::Point>> quads;
     for (const auto& contour : contours) {
@@ -244,7 +244,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getQuads(const cv::Mat& threshma
 }
 
 std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::vector<cv::Point>>& quads, int erosion) {
-    const int n = quads.size();
+    const int n = static_cast<int>(quads.size());
     
     DSU dsu(n);
     std::vector<std::array<bool, 4>> linked(n, std::array<bool, 4>{false, false, false, false});
@@ -286,7 +286,7 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
     // leaderid, linkedcnt, quadcnt
     std::unordered_map<int, std::unordered_map<int, int>> leaderlinkquadcnt;
     for (int i = 0, id = 0; i < n; ++i) {
-        int linkedpointcnt = std::count(linked[i].begin(), linked[i].end(), true);
+        int linkedpointcnt = static_cast<int>(std::count(linked[i].begin(), linked[i].end(), true));
         if (int size = dsu.size(i); \
             !((linkedpointcnt & (linkedpointcnt - 1)) == 0)
             // !(linkedpointcnt == 1 || linkedpointcnt == 2 || linkedpointcnt == 4)
@@ -310,7 +310,7 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
     }
 
     auto shouldErase = [this, &leaderlinkquadcnt](const std::vector<std::vector<cv::Point>>::iterator& item, int oldidx) -> bool {
-        const int cornercnt = item->size();
+        const int cornercnt = static_cast<int>(item->size());
         if (!std::any_of(blockcorners_.begin(), blockcorners_.end(), [cornercnt](const auto& cur) { return 2 * cur.second == cornercnt; })) {
             return true;
         }
