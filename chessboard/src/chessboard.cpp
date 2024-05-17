@@ -91,7 +91,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
     std::sort(chessboards.begin(), chessboards.end(), [](const auto& lhs, const auto& rhs) -> bool {
         cv::Point lcentral = geometry::getCentralPoint(lhs);
         cv::Point rcentral = geometry::getCentralPoint(rhs);
-        return lcentral.x < rcentral.x || lcentral.x == rcentral.x && lcentral.y < rcentral.y;
+        return lcentral.x < rcentral.x || (lcentral.x == rcentral.x && lcentral.y < rcentral.y);
     });
 
     std::vector<std::vector<cv::Point>> newchessboards;
@@ -355,7 +355,7 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
             eraseForMap(oldidx);
         } else {
             std::sort(item->begin(), item->end(), [](const auto& lhs, const auto& rhs) {
-                return lhs.x < rhs.x || lhs.x == rhs.x && lhs.y < rhs.y;
+                return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y);
             });
             item->erase(std::unique(item->begin(), item->end()), item->end());
             item = std::next(item);

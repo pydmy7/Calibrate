@@ -165,7 +165,7 @@ void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
 
 void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
-        return lhs.y < rhs.y || lhs.y == rhs.y && lhs.x < rhs.x;
+        return lhs.y < rhs.y || (lhs.y == rhs.y && lhs.x < rhs.x);
     });
     for (int i = 0; i < int(corners.size()); i += 3) {
         std::sort(corners.begin() + i, corners.begin() + i + 3, [](const auto& lhs, const auto& rhs) {
@@ -176,7 +176,7 @@ void sortCornersForThreeMulFour(std::vector<cv::Point>& corners) {
 
 void sortCornersForTwoMulTwo(std::vector<cv::Point>& corners) {
     std::sort(corners.begin(), corners.end(), [](const auto& lhs, const auto& rhs) {
-        return lhs.y < rhs.y || lhs.y == rhs.y && lhs.x < rhs.x;
+        return lhs.y < rhs.y || (lhs.y == rhs.y && lhs.x < rhs.x);
     });
     for (int i = 0; i < int(corners.size()); i += 2) {
         std::sort(corners.begin() + i, corners.begin() + i + 2, [](const auto& lhs, const auto& rhs) {

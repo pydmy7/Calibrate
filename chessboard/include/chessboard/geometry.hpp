@@ -375,4 +375,4 @@ std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
 
 // ------------------------------------------------------------ Polygon
 
-}
+}  // namespace geometry
