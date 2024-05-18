@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 project(
     Calibrate
-    LANGUAGES CXX C
-    DESCRIPTION "Calibrate Tools"
+    LANGUAGES CXX
+    DESCRIPTION "Calibrate Library"
     VERSION 0.1.0
 )
 
