@@ -1,8 +1,8 @@
-build/*
-cmake-build/*
 .vscode/*
+.cache/*
+
+build/*
 output/*
 
 *.dll
 *.lib
-

@@ -3,14 +3,14 @@
 clear
 echo -e "clear"
 
-echo -e "\nrm -rf cmake-build"
-rm -rf cmake-build
+echo -e "\nrm -rf build"
+rm -rf build
 
-echo -e "\nsource: cmake -S . -B cmake-build"
-cmake -S . -B cmake-build
+echo -e "\nsource: cmake -S . -B build -G Ninja"
+cmake -S . -B build -G Ninja
 
-echo -e "\nbuild: cmake --build cmake-build -j"
-cmake --build cmake-build -j
+echo -e "\nbuild: cmake --build build -j"
+cmake --build build -j
 
-echo -e "\nrun: ./cmake-build/test/test"
-./cmake-build/test/test
+echo -e "\nrun: ./build/test/test"
+./build/test/test

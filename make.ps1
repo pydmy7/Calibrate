@@ -1,14 +1,14 @@
 clear
 echo "clear"
 
-echo "`nRemove-Item -Path .\cmake-build\ -Recurse -Force"
-Remove-Item -Path .\cmake-build\ -Recurse -Force
+echo "`nRemove-Item -Path .\build -Recurse -Force"
+Remove-Item -Path .\build -Recurse -Force
 
-echo "`nsource: cmake -S . -B cmake-build"
-cmake -S . -B cmake-build
+echo "`nsource: cmake -S . -B build -G Ninja"
+cmake -S . -B build -G Ninja
 
-echo "`nbuild: cmake --build cmake-build -j"
-cmake --build cmake-build -j
+echo "`nbuild: cmake --build build -j"
+cmake --build build -j
 
-echo "`nrun: .\cmake-build\test\Debug\test.exe"
-.\cmake-build\test\Debug\test.exe
+echo "`nrun: .\build\test\test.exe"
+.\build\test\test.exe

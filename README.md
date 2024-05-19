@@ -1,9 +1,3 @@
-#### minimul version required
--std=c++17, cmake 3.15, opencv 4.x.
-```sh
-sudo apt install g++ cmake libopencv-dev
-```
-
 #### features
 
 - [X] find chessboard corner
@@ -11,12 +5,25 @@ sudo apt install g++ cmake libopencv-dev
 - [X] async concurrent
 - [X] platform: Linux / Windows
 
+
+#### requirements
+`linux`
+```sh
+apt install clang++ ninja cmake libopencv-dev
+```
+`windows`
+```powershell
+scoop install llvm ninja cmake
+```
+
+
 #### run test demo
 
 ```sh
 ./make.sh  # Linux
 ./make.ps1  # Windows
 ```
+
 
 #### how to use
 
