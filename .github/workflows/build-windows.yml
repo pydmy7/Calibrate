@@ -14,11 +14,9 @@ jobs:
           submodules: true
 
       - name: Setup scoop
-        uses: MinoruSekine/setup-scoop@v4
+        uses: MinoruSekine/setup-scoop@v3
 
-      - run: scoop bucket rm main
-      - run: scoop bucket add main
-      - run: scoop install main/llvm main/ninja main/cmake
+      - run: scoop install llvm ninja cmake
 
       - run: cmake -S . -B build -G Ninja
       - run: cmake --build build -j
