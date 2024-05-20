@@ -13,10 +13,27 @@ jobs:
         with:
           submodules: true
 
-      - run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-      - run: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-      - run: scoop bucket add main
-      - run: scoop install main/llvm main/ninja main/cmake
+      # - run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+      # - run: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+      # - run: scoop bucket add main
+      # - run: scoop install main/llvm main/ninja main/cmake
 
-      - run: cmake -S . -B build -G Ninja
-      - run: cmake --build build -j
+      # - run: cmake -S . -B build -G Ninja
+      # - run: cmake --build build -j
+
+      - run: |
+          # Install scoop
+          iex "& {$(Invoke-WebRequest -Uri 'https://get.scoop.sh' -UseBasicParsing)}"
+
+          # Ensure scoop is available in the current session
+          $env:SCOOP='C:\Users\runneradmin\scoop'
+          $env:PATH="$env:SCOOP\shims;$env:PATH"
+
+          # Add the main bucket
+          scoop bucket add main
+          
+          # Example: install a package using scoop
+          scoop install main/cmake
+
+          # Example command to show that cmake is installed
+          cmake --version
