@@ -1,12 +1,11 @@
-name: build-under-ubuntu
-run-name: build-ubuntu
+name: build-and-example
+run-name: build-and-example
 
 on: [push]
 
 jobs:
   build-project-under-ubuntu:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4.1.6
@@ -18,3 +17,9 @@ jobs:
 
       - run: cmake -S . -B build -G Ninja
       - run: cmake --build build -j
+
+  example-job:
+    runs-on: windows-latest
+    steps:
+      - name: Run a command in PowerShell
+        run: echo "This runs in PowerShell"
