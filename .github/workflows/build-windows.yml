@@ -13,11 +13,8 @@ jobs:
         with:
           submodules: true
 
-      - run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-      - run: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-      
-      - run: $env:SCOOP='C:\Users\runneradmin\scoop'
-      - run: $env:PATH="$env:SCOOP\shims;$env:PATH"
+      - name: Setup scoop
+        uses: MinoruSekine/setup-scoop@v4
 
       - run: scoop bucket add main
       - run: scoop install main/llvm main/ninja main/cmake
