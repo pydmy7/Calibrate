@@ -1,13 +1,20 @@
 name: build-under-ubuntu
 run-name: build-ubuntu
+
 on: [push]
+
 jobs:
   build-project-under-ubuntu:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          submodules: true
+
       - run: sudo apt update
-      - run: sudo apt install clang ninja-build cmake libopencv-dev
+      - run: sudo apt install -y clang ninja-build cmake libopencv-dev
+
       - run: cmake -S . -B build -G Ninja
       - run: cmake --build build -j
