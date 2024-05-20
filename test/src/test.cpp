@@ -149,17 +149,17 @@ void test() {
 
 int main() {
 
+    // test34();
+    testWeiChai();
+    // testJieFang();
+    // test();
+
     spdlog::info("Hello, {}!", "world");
     spdlog::warn("This is a warning!");
     spdlog::error("This is an error!");
     spdlog::critical("Critical error with number: {}", 42);
     spdlog::set_pattern("%Y-%m-%d %H:%M:%S.%e %l %n %v");
     spdlog::info("Custom pattern log example");
-
-    // test34();
-    // testWeiChai();
-    // testJieFang();
-    // test();
 
     return 0;
 }

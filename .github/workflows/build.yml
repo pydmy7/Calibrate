@@ -1,0 +1,13 @@
+name: build-under-ubuntu
+run-name: build-ubuntu
+on: [push]
+jobs:
+  build-project-under-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y clang++ ninja-build cmake libopencv-dev
+      - run: cmake -S . -B build -G Ninja
+      - run: cmake --build build -j
