@@ -16,6 +16,7 @@ jobs:
       - name: Setup scoop
         uses: MinoruSekine/setup-scoop@v4
 
+      - run: scoop bucket rm main
       - run: scoop bucket add main
       - run: scoop install main/llvm main/ninja main/cmake
 
