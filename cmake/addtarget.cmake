@@ -1,9 +1,17 @@
 macro(addExecutable target)
     aux_source_directory(./src src)
-    message("${target}_src: ${src}")
+    message("-------${target}_src-------")
+    foreach(file ${src})
+        message("${file}")
+    endforeach()
+    message("-------${target}_src-------")
 
     file(GLOB_RECURSE include ./include/${target}/*.hpp)
-    message("${target}_include: ${include}")
+    message("-------${target}_include-------")
+    foreach(file ${include})
+        message("${file}")
+    endforeach()
+    message("-------${target}_include-------")
 
     add_executable(
         ${target}
@@ -24,10 +32,18 @@ endmacro(addExecutable)
 
 macro(addLibrary target)
     aux_source_directory(./src src)
-    message("${target}_src: ${src}")
+    message("-------${target}_src-------")
+    foreach(file ${src})
+        message("${file}")
+    endforeach()
+    message("-------${target}_src-------")
 
     file(GLOB_RECURSE include ./include/${target}/*.hpp)
-    message("${target}_include: ${include}")
+    message("-------${target}_include-------")
+    foreach(file ${include})
+        message("${file}")
+    endforeach()
+    message("-------${target}_include-------")
 
     add_library(
         ${target}
