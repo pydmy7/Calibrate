@@ -9,7 +9,7 @@
 #### requirements
 `linux`
 ```sh
-apt install clang++ ninja cmake libopencv-dev
+sudo apt install -y clang ninja-build cmake libopencv-dev
 ```
 `windows`
 ```powershell
@@ -28,7 +28,8 @@ scoop install llvm ninja cmake
 #### how to use
 
 ```bash
-git submodule add https://github.com/pydmy7/Calibrate.git
+git submodule add https://github.com/pydmy7/Calibrate.git 3rdparty/Calibrate
+git submodule update --init --recursive
 ```
 
 ```cmake
