@@ -9,8 +9,6 @@
 
 #include <cassert>
 #include <cstdio>
-#include <iostream>
-#include <numeric>
 #include <algorithm>
 #include <cmath>
 #include <array>
