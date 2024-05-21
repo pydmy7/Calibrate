@@ -5,17 +5,19 @@
 - [X] async concurrent
 - [X] platform: Linux / Windows
 
-
 #### requirements
+
 `linux`
+
 ```sh
-sudo apt install -y clang ninja-build cmake libopencv-dev
+sudo apt install clang ninja-build cmake libopencv-dev
 ```
+
 `windows`
+
 ```powershell
 scoop install llvm ninja cmake
 ```
-
 
 #### run test demo
 
@@ -23,7 +25,6 @@ scoop install llvm ninja cmake
 ./make.sh  # Linux
 ./make.ps1  # Windows
 ```
-
 
 #### how to use
 
