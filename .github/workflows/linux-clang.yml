@@ -1,5 +1,5 @@
 name: linux
-run-name: build
+run-name: clang
 
 on: [push]
 
@@ -8,13 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository code
+      - name: Checkout
         uses: actions/checkout@v4.1.6
         with:
           submodules: true
 
-      - run: sudo apt update
-      - run: sudo apt install -y clang ninja-build cmake libopencv-dev
+      - run: sudo apt install clang ninja-build cmake libopencv-dev
 
       - run: cmake -S . -B build -G Ninja
       - run: cmake --build build -j

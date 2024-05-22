@@ -50,13 +50,13 @@ double angle(Point<T> a, Point<T> b) {
 }
 
 template<typename T>
-double getDistance(const Point<T>& a, const Point<T>& b) {
+double getDistance(Point<T> a, Point<T> b) {
     double dx = a.x - b.x, dy = a.y - b.y;
     return std::sqrt(dx * dx + dy * dy);
 }
 
 template<typename T>
-Point<T> getCentralPoint(const std::vector<Point<T>>& points) {
+Point<T> getCentralPoint(std::vector<Point<T>> points) {
     if (points.empty()) {
         return {};
     }
@@ -160,7 +160,7 @@ std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) 
 // ------------------------------------------------------------ Polygon
 
 template<typename T>
-double polygonArea(const std::vector<Point<T>>& points) {
+double polygonArea(std::vector<Point<T>> points) {
     if (points.size() < 3) {
         return 0.0;
     }
@@ -205,7 +205,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
 }
 
 template<typename T>
-bool pointInPolygon(const Point<T>& a, const std::vector<Point<T>>& p) {
+bool pointInPolygon(Point<T> a, std::vector<Point<T>> p) {
     int n = static_cast<int>(p.size());
     for (int i = 0; i < n; i++) {
         if (pointOnSegment(a, Line(p[i], p[(i + 1) % n]))) {
@@ -310,7 +310,7 @@ bool polygonInPolygon(std::vector<Point<T>> polygon1, std::vector<Point<T>> poly
     if (polygonArea(polygon1) > polygonArea(polygon2)) {
         std::swap(polygon1, polygon2);
     }
-    return std::all_of(polygon1.begin(), polygon1.end(), [&polygon2](const auto& point) {
+    return std::all_of(polygon1.begin(), polygon1.end(), [&polygon2](auto&& point) {
         return pointInPolygon(point, polygon2);
     });
 }

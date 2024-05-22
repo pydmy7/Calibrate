@@ -1,0 +1,25 @@
+name: windows
+run-name: clang
+
+on: [push]
+
+jobs:
+  windowsserver:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+        with:
+          submodules: true
+
+      - name: Setup scoop
+        uses: MinoruSekine/setup-scoop@v4
+
+      - run: scoop install llvm ninja cmake
+
+      - run: Expand-Archive -Path '3rdparty\opencv\bin\opencv_world490d.zip' -DestinationPath '3rdparty\opencv\bin'
+      - run: Expand-Archive -Path '3rdparty\opencv\lib\opencv_world490d.zip' -DestinationPath '3rdparty\opencv\lib'
+
+      - run: cmake -S . -B build -G Ninja
+      - run: cmake --build build -j
