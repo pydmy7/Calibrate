@@ -4,5 +4,5 @@
 build/*
 output/*
 
-*.dll
-*.lib
+3rdparty/opencv/bin/opencv_world490d.dll
+3rdparty/opencv/lib/opencv_world490d.lib

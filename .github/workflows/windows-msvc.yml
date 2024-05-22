@@ -20,9 +20,6 @@ jobs:
         uses: MinoruSekine/setup-scoop@v4
 
       - run: scoop install cmake
-
-      - run: Expand-Archive -Path '3rdparty\opencv\bin\opencv_world490d.zip' -DestinationPath '3rdparty\opencv\bin'
-      - run: Expand-Archive -Path '3rdparty\opencv\lib\opencv_world490d.zip' -DestinationPath '3rdparty\opencv\lib'
       
       - run: cmake -S . -B build
       - run: cmake --build build -j
