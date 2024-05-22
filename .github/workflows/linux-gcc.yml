@@ -1,0 +1,19 @@
+name: linux
+run-name: gcc
+
+on: [push]
+
+jobs:
+  ubuntu-gcc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+        with:
+          submodules: true
+
+      - run: sudo apt install gcc cmake libopencv-dev
+
+      - run: cmake -S . -B build
+      - run: cmake --build build -j
