@@ -4,7 +4,7 @@ run-name: clang
 on: [push]
 
 jobs:
-  windowsserver:
+  server-clang:
     runs-on: windows-latest
 
     steps:

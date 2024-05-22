@@ -4,7 +4,7 @@ run-name: clang
 on: [push]
 
 jobs:
-  ubuntu:
+  ubuntu-clang:
     runs-on: ubuntu-latest
 
     steps:
