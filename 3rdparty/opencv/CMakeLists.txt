@@ -1,6 +1,4 @@
 if(WIN32)
-    # Expand-Archive -Path ".\opencv_world490.zip" -DestinationPath "./"
-
     execute_process(
         COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/'"
         COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490d.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/'"
