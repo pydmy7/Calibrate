@@ -1,7 +1,7 @@
 if(WIN32)
-    add_library(OpenCVImported SHARED IMPORTED GLOBAL)
+    add_library(OpenCV::OpenCV SHARED IMPORTED GLOBAL)
     set_target_properties(
-        OpenCVImported
+        OpenCV::OpenCV
         PROPERTIES
         INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
 
@@ -14,7 +14,6 @@ if(WIN32)
         IMPORTED_CONFIGURATIONS "DEBUG;RELEASE"
         IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
     )
-    add_library(OpenCV::OpenCV ALIAS OpenCVImported)
 else()
     include(${CMAKE_SOURCE_DIR}/cmake/findopencv.cmake)
 endif()
