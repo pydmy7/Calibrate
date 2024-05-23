@@ -14,6 +14,7 @@ project(
 )
 
 include(cmake/platform.cmake)
+include(cmake/sanitize.cmake)
 include(cmake/addtarget.cmake)
 include(cmake/copydll.cmake)
 
