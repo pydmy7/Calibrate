@@ -6,3 +6,5 @@ output/*
 
 *.dll
 *.lib
+3rdparty/opencv/bin/opencv_world490.dll
+3rdparty/opencv/lib/opencv_world490.lib
