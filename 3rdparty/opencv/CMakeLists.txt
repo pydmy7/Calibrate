@@ -1,9 +1,9 @@
 if(WIN32)
     execute_process(
-        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/'"
-        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490d.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/'"
-        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/lib/opencv_world490.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/lib/'"
-        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/lib/opencv_world490d.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/lib/'"
+        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/' -Force"
+        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/bin/opencv_world490d.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/bin/' -Force"
+        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/lib/opencv_world490.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/lib/' -Force"
+        COMMAND pwsh -Command "Expand-Archive -Path '${CMAKE_CURRENT_SOURCE_DIR}/lib/opencv_world490d.zip' -DestinationPath '${CMAKE_CURRENT_SOURCE_DIR}/lib/' -Force"
     )
 
     add_library(OpenCV::OpenCV SHARED IMPORTED GLOBAL)
