@@ -23,8 +23,18 @@ macro(addExecutable target)
 
     if(MSVC)
         target_compile_options(${target} PRIVATE /W4)
+
+        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+            # target_compile_options(${target} PRIVATE /fsanitize=address)
+            # target_link_options(${target} PRIVATE /fsanitize=address)
+        endif()
     else()
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+
+        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+            target_compile_options(${target} PRIVATE -fsanitize=address)
+            target_link_options(${target} PRIVATE -fsanitize=address)
+        endif()
     endif()
 
 endmacro(addExecutable)
@@ -56,8 +66,18 @@ macro(addLibrary target)
 
     if(MSVC)
         target_compile_options(${target} PRIVATE /W4)
+
+        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+            # target_compile_options(${target} PRIVATE /fsanitize=address)
+            # target_link_options(${target} PRIVATE /fsanitize=address)
+        endif()
     else()
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+
+        if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+            target_compile_options(${target} PRIVATE -fsanitize=address)
+            target_link_options(${target} PRIVATE -fsanitize=address)
+        endif()
     endif()
 
 endmacro(addLibrary)
