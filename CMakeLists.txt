@@ -13,9 +13,9 @@ project(
     VERSION 0.1.0
 )
 
+include(cmake/platform.cmake)
 include(cmake/addtarget.cmake)
 include(cmake/copydll.cmake)
-include(cmake/platform.cmake)
 
 add_subdirectory(3rdparty)
 add_subdirectory(chessboard)
