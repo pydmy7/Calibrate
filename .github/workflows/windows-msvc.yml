@@ -13,9 +13,6 @@ jobs:
         with:
           submodules: true
 
-      # - name: setup-msbuild
-      #   uses: microsoft/setup-msbuild@v2
-
       - name: Setup scoop
         uses: MinoruSekine/setup-scoop@v4
 
