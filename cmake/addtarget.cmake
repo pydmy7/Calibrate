@@ -19,7 +19,7 @@ macro(addExecutable target)
     )
 
     target_include_directories(${target} PRIVATE include)
-    target_compile_features(${target} PRIVATE cxx_std_17)
+    target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
 endmacro(addExecutable)
@@ -47,7 +47,7 @@ macro(addLibrary target)
     )
 
     target_include_directories(${target} PUBLIC include)
-    target_compile_features(${target} PRIVATE cxx_std_17)
+    target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
 endmacro(addLibrary)
