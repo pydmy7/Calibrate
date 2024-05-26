@@ -6,9 +6,8 @@
 
 #include <spdlog/spdlog.h>
 
-#include <unordered_map>
 #include <iostream>
-#include <format>
+#include <unordered_map>
 #include <filesystem>
 
 std::unordered_map<int, cornersort::CameraPosition> cameraposition = {
@@ -25,7 +24,7 @@ constexpr std::string_view sourcedir = SOURCE_DIR;
 void testWeiChai() {
     for (int group = 5; group >= 0; --group) {
         for (int i = 0; i < 6; ++i) {
-            std::string inputfilepath = std::format("{}/images/3-3/weichai/{}/src{}.png", sourcedir, group, i);
+            std::string inputfilepath = fmt::format("{}/images/3-3/weichai/{}/src{}.png", sourcedir, group, i);
             cv::Mat image = cv::imread(inputfilepath);
             if (image.empty()) {
                 std::cerr << "image empty\n";
@@ -43,8 +42,8 @@ void testWeiChai() {
                 }
             }
 
-            std::string outputdirpath = std::format("{}/output/3-3/weichai/{}", sourcedir, group);
-            std::string outputfilepath = std::format("{}/src{}.png", outputdirpath, i);
+            std::string outputdirpath = fmt::format("{}/output/3-3/weichai/{}", sourcedir, group);
+            std::string outputfilepath = fmt::format("{}/src{}.png", outputdirpath, i);
             std::filesystem::create_directories(outputdirpath);
             cv::imwrite(outputfilepath, image);
             std::clog << outputfilepath << '\n';
@@ -55,7 +54,7 @@ void testWeiChai() {
 void testJieFang() {
     for (int group = 4; group >= 0; --group) {
         for (int i = 0; i < 6; ++i) {
-            std::string inputfilepath = std::format("{}/images/3-3/jiefang/{}/src{}.png", sourcedir, group, i);
+            std::string inputfilepath = fmt::format("{}/images/3-3/jiefang/{}/src{}.png", sourcedir, group, i);
             cv::Mat image = cv::imread(inputfilepath);
             if (image.empty()) {
                 std::cerr << "image empty\n";
@@ -73,8 +72,8 @@ void testJieFang() {
                 }
             }
 
-            std::string outputdirpath = std::format("{}/output/3-3/jiefang/{}", sourcedir, group);
-            std::string outputfilepath = std::format("{}/src{}.png", outputdirpath, i);
+            std::string outputdirpath = fmt::format("{}/output/3-3/jiefang/{}", sourcedir, group);
+            std::string outputfilepath = fmt::format("{}/src{}.png", outputdirpath, i);
             std::filesystem::create_directories(outputdirpath);
             cv::imwrite(outputfilepath, image);
             std::clog << outputfilepath << '\n';
@@ -84,7 +83,7 @@ void testJieFang() {
 
 void test34() {
     for (int i = 31; i >= 0; --i) {
-        std::string inputfilepath = std::format("{}/images/3-4/src{}.png", sourcedir, i);
+        std::string inputfilepath = fmt::format("{}/images/3-4/src{}.png", sourcedir, i);
         cv::Mat image = cv::imread(inputfilepath);
         if (image.empty()) {
             std::cerr << "image empty\n";
@@ -102,8 +101,8 @@ void test34() {
             }
         }
 
-        std::string outputdirpath = std::format("{}/output/3-4", sourcedir);
-        std::string outputfilepath = std::format("{}/src{}.png", outputdirpath, i);
+        std::string outputdirpath = fmt::format("{}/output/3-4", sourcedir);
+        std::string outputfilepath = fmt::format("{}/src{}.png", outputdirpath, i);
         std::filesystem::create_directories(outputdirpath);
         cv::imwrite(outputfilepath, image);
         std::clog << outputfilepath << '\n';
