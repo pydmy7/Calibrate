@@ -1,4 +1,4 @@
-macro(copyDll target_name)
+function(copyDll target_name)
     if(WIN32)
         add_custom_command(
             TARGET ${target_name}
@@ -7,4 +7,4 @@ macro(copyDll target_name)
             COMMAND_EXPAND_LISTS
         )
     endif()
-endmacro(copyDll)
+endfunction(copyDll)

@@ -12,5 +12,5 @@ cmake -S . -B build -G Ninja
 echo -e "\nbuild: cmake --build build -j"
 cmake --build build -j
 
-echo -e "\nrun: ./build/test/test"
-./build/test/test
+echo -e "\nrun: ./build/unittest/unittest.exe"
+./build/unittest/unittest.exe

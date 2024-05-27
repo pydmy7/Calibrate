@@ -1,9 +1,10 @@
 #include "config.h"
 
-#include "chessboard/chessboard.hpp"
 #include "chessboard/cornersort.hpp"
+#include "chessboard/chessboard.hpp"
 
 #include <opencv2/core/mat.hpp>
+#include <opencv2/core/utility.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 

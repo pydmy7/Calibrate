@@ -1,4 +1,4 @@
-macro(useSanitize target_name)
+function(useSanitize target_name)
     isMSVCBackend(msvcbackend)
     isMinGWBackend(mingwbackend)
     isGNUBackend(gnubackend)
@@ -33,6 +33,5 @@ macro(useSanitize target_name)
 
         if(${msvcbackend})
         endif()
-    endif()
-    
-endmacro(useSanitize)
+    endif()    
+endfunction(useSanitize)

@@ -15,9 +15,14 @@ project(
 
 include(cmake/platform.cmake)
 include(cmake/sanitize.cmake)
+include(cmake/clangtidy.cmake)
+include(cmake/clangformat.cmake)
 include(cmake/addtarget.cmake)
 include(cmake/copydll.cmake)
 
 add_subdirectory(3rdparty)
 add_subdirectory(chessboard)
-add_subdirectory(test)
+
+include(CTest)
+enable_testing()
+add_subdirectory(unittest)

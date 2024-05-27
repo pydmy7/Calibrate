@@ -1,17 +1,5 @@
-macro(addExecutable target)
+function(addExecutable target)
     aux_source_directory(./src src)
-    message("-------${target}_src-------")
-    foreach(file ${src})
-        message("${file}")
-    endforeach()
-    message("-------${target}_src-------")
-
-    file(GLOB_RECURSE include ./include/${target}/*.hpp)
-    message("-------${target}_include-------")
-    foreach(file ${include})
-        message("${file}")
-    endforeach()
-    message("-------${target}_include-------")
 
     add_executable(
         ${target}
@@ -22,23 +10,13 @@ macro(addExecutable target)
     target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
-endmacro(addExecutable)
+    # useClangTidy(${target})
+    # useClangFormat(${target} .)
+endfunction(addExecutable)
 
 
-macro(addLibrary target)
+function(addLibrary target)
     aux_source_directory(./src src)
-    message("-------${target}_src-------")
-    foreach(file ${src})
-        message("${file}")
-    endforeach()
-    message("-------${target}_src-------")
-
-    file(GLOB_RECURSE include ./include/${target}/*.hpp)
-    message("-------${target}_include-------")
-    foreach(file ${include})
-        message("${file}")
-    endforeach()
-    message("-------${target}_include-------")
 
     add_library(
         ${target}
@@ -50,4 +28,6 @@ macro(addLibrary target)
     target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
-endmacro(addLibrary)
+    # useClangTidy(${target})
+    # useClangFormat(${target} .)
+endfunction(addLibrary)
