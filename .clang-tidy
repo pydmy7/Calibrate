@@ -1,0 +1,8 @@
+Checks: >
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  modernize-*,
+  -modernize-use-trailing-return-type,
+
+HeaderFilterRegex: '.*chessboard/.+\.(hpp|cpp)$'

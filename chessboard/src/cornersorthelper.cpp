@@ -3,6 +3,8 @@
 #include "chessboard/cornersort.hpp"
 #include "chessboard/geometry.hpp"
 
+#include <numbers>
+
 std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType chessboardtype) {
     if (chessboardtype == cornersort::ChessboardType::twomultwo) {
         return {2, 2};
@@ -84,7 +86,7 @@ void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
         std::pair<int, int>{0, 8},
         std::pair<int, int>{2, 6}
     };
-    if (geometry::angle(endpoint - startpoint, cv::Point{1, 0}) / 3.1415926535L > 90 / 180.0L) {
+    if (geometry::angle(endpoint - startpoint, cv::Point{1, 0}) / std::numbers::pi > 90 / 180.0L) {
         std::swap(transformidx[0], transformidx[1]);
     }
     newcorners[transformidx[0].first] = startpoint;

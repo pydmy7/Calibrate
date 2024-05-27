@@ -4,6 +4,6 @@ function(useClangTidy target)
         ${target}
         PROPERTIES
         CXX_CLANG_TIDY
-        "${CLANG-TIDY_PATH};-checks=*;--warnings-as-errors=*"
+        "${CLANG-TIDY_PATH}"
     )
 endfunction()

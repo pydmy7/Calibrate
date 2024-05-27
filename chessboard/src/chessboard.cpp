@@ -17,6 +17,7 @@
 #include <unordered_map>
 #include <map>
 #include <future>
+#include <numbers>
 
 Chessboard::Chessboard(cv::Mat mat, const std::initializer_list<pii>& patternsizes, cornersort::CameraPosition cameraposition) : \
     crosskernel_(cv::getStructuringElement(cv::MORPH_CROSS, cv::Size{3, 3})), \
@@ -213,7 +214,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getQuads(const cv::Mat& threshma
         for (int i = 0; i < 2; ++i) {
             cv::Point p1 = quad[(i + 1) % 4] - quad[i];
             cv::Point p2 = quad[(i + 2) % 4] - quad[(i + 3) % 4];
-            if (geometry::angle(p1, p2) > 30 / 180.0 * 3.1415926535) {
+            if (geometry::angle(p1, p2) > 30 / 180.0 * std::numbers::pi) {
                 return false;
             }
         }
