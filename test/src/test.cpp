@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include "chessboard/chessboard.hpp"
 #include "chessboard/cornersort.hpp"
 
