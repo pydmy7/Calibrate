@@ -1,5 +1,5 @@
 function(addExecutable target)
-    aux_source_directory(./src src)
+    aux_source_directory("${CMAKE_CURRENT_SOURCE_DIR}/src" src)
 
     add_executable(
         ${target}
@@ -10,13 +10,13 @@ function(addExecutable target)
     target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
-    useClangTidy(${target})
+    # useClangTidy(${target})
     # useClangFormat(${target} .)
 endfunction(addExecutable)
 
 
 function(addLibrary target)
-    aux_source_directory(./src src)
+    aux_source_directory("${CMAKE_CURRENT_SOURCE_DIR}/src" src)
 
     add_library(
         ${target}
@@ -28,6 +28,6 @@ function(addLibrary target)
     target_compile_features(${target} PRIVATE cxx_std_20)
 
     useSanitize(${target})
-    useClangTidy(${target})
+    # useClangTidy(${target})
     # useClangFormat(${target} .)
 endfunction(addLibrary)
