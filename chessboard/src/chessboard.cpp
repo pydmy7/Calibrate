@@ -104,17 +104,17 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
 
         auto getHighestFrequency = [&chessboards](int l, int r) -> std::vector<cv::Point> {
             auto vectorPointToVectorPair = [](auto&& points) -> std::vector<std::pair<int, int>> {
-                std::vector<std::pair<int, int>> pairs;
-                for (auto&& [x, y] : points) {
-                    pairs.emplace_back(x, y);
+                std::vector<std::pair<int, int>> pairs(points.size());
+                for (std::size_t i = 0; i < points.size(); ++i) {
+                    pairs[i] = {points[i].x, points[i].y};
                 }
                 return pairs;
             };
 
             auto vectorPairToVectorPoint = [](auto&& pairs) -> std::vector<cv::Point> {
-                std::vector<cv::Point> points;
-                for (auto&& [x, y] : pairs) {
-                    points.emplace_back(x, y);
+                std::vector<cv::Point> points(pairs.size());
+                for (std::size_t i = 0; i < pairs.size(); ++i) {
+                    points[i] = {pairs[i].first, pairs[i].second};
                 }
                 return points;
             };

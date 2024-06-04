@@ -31,7 +31,7 @@ int DSU::size(int x) {
     return sz[leader(x)];
 }
 
-int DSU::count() {
+int DSU::count() const {
     return cnt;
 }
 

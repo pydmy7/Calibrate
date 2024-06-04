@@ -7,5 +7,5 @@ struct Timer {
     
     Timer();
     ~Timer();
-    double getDuration();
+    double getDuration() const;
 };

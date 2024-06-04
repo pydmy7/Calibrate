@@ -65,9 +65,8 @@ void testAllImage() {
         std::vector<std::vector<cv::Point>> chessboards = cur.getChessboards();
 
         for (int idx = 0; auto&& corners : chessboards) {
-            for (int j = 0; j < static_cast<int>(corners.size()); ++j) {
-                cv::putText(image, std::to_string(idx++), corners[j], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
-                // std::cout << corners[j] << " \n"[j == corners.size() - 1];
+            for (auto&& corner : corners) {
+                cv::putText(image, std::to_string(idx++), corner, cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
             }
         }
 

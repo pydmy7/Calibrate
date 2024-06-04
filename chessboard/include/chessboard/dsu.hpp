@@ -13,6 +13,6 @@ public:
     int leader(int x);
     bool same(int a, int b);
     int size(int x);
-    int count();
+    int count() const;
     bool merge(int a, int b);
 };

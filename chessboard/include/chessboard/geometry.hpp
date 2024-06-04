@@ -70,7 +70,7 @@ Point<T> getCentralPoint(std::vector<Point<T>> points) {
 template<typename T>
 struct Line {
     Point<T> a, b;
-    Line(Point<T> a_ = Point<T>(), Point<T> b_ = Point<T>()) : a(a_), b(b_) {}
+    explicit Line(Point<T> a_ = Point<T>(), Point<T> b_ = Point<T>()) : a(a_), b(b_) {}
 };
 
 template<typename T>
