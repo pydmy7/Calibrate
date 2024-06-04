@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: true
 
+      - run: sudo apt update
       - run: sudo apt install gcc cmake libopencv-dev
 
-      - run: cmake -S . -B build
-      - run: cmake --build build -j
+      - run: ./make.sh
