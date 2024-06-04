@@ -16,4 +16,5 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install clang ninja-build cmake libopencv-dev
 
-      - run: ./make.sh
+      - run: cmake -S . -B build -G Ninja
+      - run: cmake --build build -j

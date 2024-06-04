@@ -18,4 +18,5 @@ jobs:
 
       - run: scoop install llvm ninja cmake
 
-      - run: ./make.ps1
+      - run: cmake -S . -B build -G Ninja
+      - run: cmake --build build -j
