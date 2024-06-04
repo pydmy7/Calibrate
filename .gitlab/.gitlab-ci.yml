@@ -1,0 +1,62 @@
+stages:
+  - build
+
+# Variables for all jobs
+variables:
+  BUILD_DIR: build
+
+# Linux job using Clang
+ubuntu-clang:
+  stage: build
+  tags:
+    - linux
+  image: ubuntu:latest
+  before_script:
+    - apt-get update -y
+    - apt-get install -y clang ninja-build cmake libopencv-dev
+    - git submodule update --init --recursive
+  script:
+    - cmake -S . -B $BUILD_DIR -G Ninja
+    - cmake --build $BUILD_DIR -j
+
+# Linux job using GCC
+ubuntu-gcc:
+  stage: build
+  tags:
+    - linux
+  image: ubuntu:latest
+  before_script:
+    - apt-get update -y
+    - apt-get install -y gcc cmake libopencv-dev
+    - git submodule update --init --recursive
+  script:
+    - cmake -S . -B $BUILD_DIR
+    - cmake --build $BUILD_DIR -j
+
+# Windows job using Clang
+server-clang:
+  stage: build
+  tags:
+    - windows
+  image: mcr.microsoft.com/windows/servercore:ltsc2022
+  before_script:
+    - powershell -Command "iwr -useb get.scoop.sh | iex"
+    - scoop install llvm ninja cmake
+    - git submodule update --init --recursive
+  script:
+    - cmake -S . -B $BUILD_DIR -G Ninja
+    - cmake --build $BUILD_DIR -j
+
+# Windows job using MSVC
+server-msvc:
+  stage: build
+  tags:
+    - windows
+  image: mcr.microsoft.com/windows/servercore:ltsc2022
+  before_script:
+    - powershell -Command "iwr -useb get.scoop.sh | iex"
+    - scoop install cmake
+    - git submodule update --init --recursive
+  script:
+    - cmake -S . -B $BUILD_DIR
+    - cmake --build $BUILD_DIR -j
