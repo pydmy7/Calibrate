@@ -4,6 +4,7 @@
 #include "chessboard/geometry.hpp"
 
 #include <numbers>
+#include <array>
 
 std::pair<int, int> getChessboardSizeByChessboardType(cornersort::ChessboardType chessboardtype) {
     if (chessboardtype == cornersort::ChessboardType::twomultwo) {
