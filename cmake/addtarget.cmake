@@ -20,7 +20,7 @@ function(addLibrary target)
 
     add_library(
         ${target}
-        STATIC
+        OBJECT
         ${src}
     )
 
