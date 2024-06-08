@@ -16,5 +16,5 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install gcc cmake libopencv-dev
 
-      - run: cmake -S . -B build
+      - run: cmake -S . -B build -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
       - run: cmake --build build -j

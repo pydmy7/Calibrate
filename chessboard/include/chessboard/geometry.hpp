@@ -186,7 +186,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
         return p;
     }
     
-    for (auto a : p) {
+    for (auto&& a : p) {
         while (h.size() > 1 && cross(a - h.back(), a - h[h.size() - 2]) <= 0) {
             h.pop_back();
         }
