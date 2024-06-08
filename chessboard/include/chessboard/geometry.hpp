@@ -56,11 +56,10 @@ double getDistance(Point<T> a, Point<T> b) {
 }
 
 template<typename T>
-Point<T> getCentralPoint(std::vector<Point<T>> points) {
-    if (points.empty()) {
-        return {};
-    }
-    return std::accumulate(points.begin(), points.end(), Point<T>{0, 0}) / static_cast<int>(points.size());
+Point<T> rotate(Point<T> a, double rad, Point<T> b = {0, 0}) {
+    T x = (a.x - b.x) * std::cos(rad) + (a.y - b.y) * std::sin(rad) + b.x;
+    T y = (b.x - a.x) * std::sin(rad) + (a.y - b.y) * std::cos(rad) + b.y;
+    return Point<T>{x, y};
 }
 
 // ------------------------------------------------------------ Point
@@ -87,7 +86,8 @@ constexpr long double eps = 1E-8;
 
 template<typename T>
 bool pointOnSegment(Point<T> p, Line<T> l) {
-    return std::abs(cross(p - l.a, l.b - l.a)) < eps && std::min(l.a.x, l.b.x) < p.x + eps && p.x - eps < std::max(l.a.x, l.b.x)
+    return std::abs(cross(p - l.a, l.b - l.a)) < eps
+        && std::min(l.a.x, l.b.x) < p.x + eps && p.x - eps < std::max(l.a.x, l.b.x)
         && std::min(l.a.y, l.b.y) < p.y + eps && p.y - eps < std::max(l.a.y, l.b.y);
 }
 
@@ -159,14 +159,33 @@ std::tuple<int, Point<T>, Point<T>> segmentIntersection(Line<T> l1, Line<T> l2) 
 
 // ------------------------------------------------------------ Polygon
 
+inline int onPolygonGrid(const std::vector<Point<int>>& p) {
+    int cnt = 0;
+    for (int n = static_cast<int>(p.size()), i = 0; i < n; ++i) {
+        auto a = p[i], b = p[(i + 1) % n];
+        cnt += std::gcd(std::abs(a.x - b.x), std::abs(a.y - b.y));
+    }
+    return cnt;
+}
+
+inline int inPolygonGrid(const std::vector<Point<int>>& p) {
+    int cnt = 0;
+    for (int n = static_cast<int>(p.size()), i = 0; i < n; ++i) {
+        auto a = p[i], b = p[(i + 1) % n], c = p[(i + 2) % n];
+        cnt += b.y * (a.x - c.x);
+    }
+    cnt = std::abs(cnt);
+    return (cnt - onPolygonGrid(p)) / 2 + 1;
+}
+
 template<typename T>
-double polygonArea(std::vector<Point<T>> points) {
-    if (points.size() < 3) {
+double polygonArea(std::vector<Point<T>> p) {
+    if (p.size() < 3) {
         return 0.0;
     }
     double area = 0.0;
-    for (int n = static_cast<int>(points.size()), i = 0; i < n; ++i) {
-        area += cross(points[i], points[(i + 1) % n]);
+    for (int n = static_cast<int>(p.size()), i = 0; i < n; ++i) {
+        area += cross(p[i], p[(i + 1) % n]);
     }
     return area / 2.0;
 }
@@ -193,8 +212,8 @@ std::vector<Point<T>> getPolygonHull(std::vector<Point<T>> p) {
         while (l.size() > 1 && cross(a - l.back(), a - l[l.size() - 2]) >= 0) {
             l.pop_back();
         }
-        l.push_back(a);
-        h.push_back(a);
+        l.emplace_back(a);
+        h.emplace_back(a);
     }
     
     l.pop_back();
@@ -316,7 +335,7 @@ bool polygonInPolygon(std::vector<Point<T>> polygon1, std::vector<Point<T>> poly
 }
 
 template<typename T>
-std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
+std::vector<Point<T>> halfPlaneIntersection(std::vector<Line<T>> lines) {
     std::sort(lines.begin(), lines.end(), [&](auto l1, auto l2) {
         auto d1 = l1.b - l1.a;
         auto d2 = l2.b - l2.a;
@@ -332,7 +351,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
     std::deque<Point<T>> ps;
     for (auto l : lines) {
         if (ls.empty()) {
-            ls.push_back(l);
+            ls.emplace_back(l);
             continue;
         }
         
@@ -357,8 +376,8 @@ std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
             return {};
         }
         
-        ps.push_back(lineIntersection(ls.back(), l));
-        ls.push_back(l);
+        ps.emplace_back(lineIntersection(ls.back(), l));
+        ls.emplace_back(l);
     }
     
     while (!ps.empty() && !pointOnLineLeft(ps.back(), ls[0])) {
@@ -368,7 +387,7 @@ std::vector<Point<T>> getPolygonHull(std::vector<Line<T>> lines) {
     if (ls.size() <= 2) {
         return {};
     }
-    ps.push_back(lineIntersection(ls[0], ls.back()));
+    ps.emplace_back(lineIntersection(ls[0], ls.back()));
     
     return std::vector(ps.begin(), ps.end());
 }

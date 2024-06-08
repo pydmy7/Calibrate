@@ -16,6 +16,7 @@
 #include <utility>
 #include <unordered_map>
 #include <map>
+#include <numeric>
 #include <future>
 #include <numbers>
 
@@ -87,18 +88,26 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
         merge(chessboards, future.get());
     }
 
-    std::sort(chessboards.begin(), chessboards.end(), [](const auto& lhs, const auto& rhs) -> bool {
-        cv::Point lcentral = geometry::getCentralPoint(lhs);
-        cv::Point rcentral = geometry::getCentralPoint(rhs);
+    auto getCentralPoint = [](std::vector<geometry::Point<int>> points) {
+        if (points.empty()) {
+            return geometry::Point<int>{0, 0};
+        }
+        return std::accumulate(points.begin(), points.end(), geometry::Point<int>{0, 0})
+            / static_cast<int>(points.size());
+    };
+
+    std::sort(chessboards.begin(), chessboards.end(), [&getCentralPoint](const auto& lhs, const auto& rhs) -> bool {
+        cv::Point lcentral = getCentralPoint(lhs);
+        cv::Point rcentral = getCentralPoint(rhs);
         return lcentral.x < rcentral.x || (lcentral.x == rcentral.x && lcentral.y < rcentral.y);
     });
 
     std::vector<std::vector<cv::Point>> newchessboards;
     for (int n = static_cast<int>(chessboards.size()), i = 0; i < n; ++i) {
         // ---------------------------------------------------
-        auto isSameChessboard = [&chessboards](int a, int b) -> bool {
-            cv::Point pa = geometry::getCentralPoint(chessboards[a]);
-            cv::Point pb = geometry::getCentralPoint(chessboards[b]);
+        auto isSameChessboard = [&chessboards, &getCentralPoint](int a, int b) -> bool {
+            cv::Point pa = getCentralPoint(chessboards[a]);
+            cv::Point pb = getCentralPoint(chessboards[b]);
             return std::abs(pa.x - pb.x) <= 5 && std::abs(pa.y - pb.y) <= 5;
         };
 
