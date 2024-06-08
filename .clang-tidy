@@ -137,4 +137,6 @@ Checks: '-*,
 
     boost-use-to-string,
 '
+
 WarningsAsErrors: '*'
+HeaderFilterRegex: '.*chessboard/.+\.(hpp|cpp)$'
