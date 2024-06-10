@@ -3,6 +3,7 @@
 
 build/*
 output/*
+images/*
 
 *.dll
 *.lib
