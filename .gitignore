@@ -1,9 +1,9 @@
-.vscode/*
-.cache/*
+/.vscode/*
+/.cache/*
 
-build/*
-output/*
-images/*
+/build/*
+/output/*
+/images/*
 
 *.dll
 *.lib
