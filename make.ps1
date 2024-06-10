@@ -4,8 +4,8 @@ echo "clear"
 echo "`nRemove-Item -Path .\build\CMakeCache.txt"
 Remove-Item -Path .\build\CMakeCache.txt
 
-echo "`nsource: cmake -S . -B build -G Ninja"
-cmake -S . -B build -G Ninja
+echo "`nsource: cmake -S . -B build -G Ninja -D MYSELF=ON"
+cmake -S . -B build -G Ninja -D MYSELF=ON
 
 echo "`nbuild: cmake --build build -j"
 cmake --build build -j

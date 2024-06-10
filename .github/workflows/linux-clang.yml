@@ -16,5 +16,5 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install clang ninja-build cmake libopencv-dev
 
-      - run: cmake -S . -B build -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+      - run: cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++
       - run: cmake --build build -j
