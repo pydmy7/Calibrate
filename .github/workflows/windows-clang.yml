@@ -18,5 +18,8 @@ jobs:
 
       - run: scoop install llvm ninja cmake
 
+      - run: 7z x 3rdparty\opencv\bin\opencv_world4100.7z
+      - run: 7z x 3rdparty\opencv\bin\opencv_world4100d.7z
+
       - run: cmake -S . -B build -G Ninja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
       - run: cmake --build build -j
