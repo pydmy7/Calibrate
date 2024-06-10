@@ -22,5 +22,5 @@ if(WIN32)
         IMPORTED_LINK_INTERFACE_LANGUAGES "CXX"
     )
 else()
-    include(${CMAKE_SOURCE_DIR}/cmake/findopencv.cmake)
+    include(${PROJECT_SOURCE_DIR}/cmake/findopencv.cmake)
 endif()

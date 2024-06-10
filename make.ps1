@@ -1,8 +1,8 @@
 clear
 echo "clear"
 
-echo "`nRemove-Item -Path .\build -Recurse -Force"
-Remove-Item -Path .\build -Recurse -Force
+echo "`nRemove-Item -Path .\build\CMakeCache.txt"
+Remove-Item -Path .\build\CMakeCache.txt
 
 echo "`nsource: cmake -S . -B build -G Ninja"
 cmake -S . -B build -G Ninja

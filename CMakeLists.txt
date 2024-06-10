@@ -8,7 +8,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 project(
     Calibrate
-    LANGUAGES CXX C
+    LANGUAGES CXX
     DESCRIPTION "Calibrate Library"
     VERSION 0.1.0
 )
