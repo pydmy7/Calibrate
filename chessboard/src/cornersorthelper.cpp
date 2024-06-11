@@ -76,7 +76,7 @@ void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
 
     std::vector<cv::Point> newcorners(corners.size());
 
-    newcorners[4] = getClosestPoint(std::accumulate(corners.begin(), corners.end(), cv::Point{0, 0}) / 9, corners);
+    newcorners[4] = getClosestPoint(std::reduce(corners.begin(), corners.end(), cv::Point{0, 0}) / 9, corners);
 
     auto [startpoint, endpoint] = getFarthestPointPair(corners);
     if (startpoint.y > endpoint.y) {

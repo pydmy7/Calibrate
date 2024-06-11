@@ -92,7 +92,7 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
         if (points.empty()) {
             return geometry::Point<int>{0, 0};
         }
-        return std::accumulate(points.begin(), points.end(), geometry::Point<int>{0, 0})
+        return std::reduce(points.begin(), points.end(), geometry::Point<int>{0, 0})
             / static_cast<int>(points.size());
     };
 
