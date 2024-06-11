@@ -270,7 +270,7 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
                         continue;
                     }
 
-                    double dist = geometry::getDistance(cv::Point(quads[i][i1]), cv::Point(quads[j][j1]));
+                    double dist = geometry::distance(cv::Point(quads[i][i1]), cv::Point(quads[j][j1]));
                     if (dist < mindist) {
                         mindist = dist;
                         pi = i1, pj = j1;
@@ -400,7 +400,7 @@ bool Chessboard::isValid() const {
 double Chessboard::quadMinEdgeLength(const std::vector<cv::Point>& quad) const {
     double minedgelen = std::numeric_limits<double>::max() / 2;
     for (int i = 0; i < 4; ++i) {
-        minedgelen = std::min(minedgelen, geometry::getDistance(cv::Point(quad[i]), cv::Point(quad[(i + 1) % 4])));
+        minedgelen = std::min(minedgelen, geometry::distance(cv::Point(quad[i]), cv::Point(quad[(i + 1) % 4])));
     }
     return minedgelen;
 }

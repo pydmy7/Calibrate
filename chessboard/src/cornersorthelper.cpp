@@ -54,7 +54,7 @@ void sortCornersForThreeMulThree(std::vector<cv::Point>& corners) {
     auto getFarthesTowPoint = [](const std::vector<cv::Point>& points, geometry::Line<int> line) -> std::pair<cv::Point, cv::Point> {
         std::vector<std::pair<cv::Point, double>> res;
         for (const cv::Point& point : points) {
-            double curdist = geometry::pointToLineDistance(point, line);
+            double curdist = geometry::distancePL(point, line);
             if (static_cast<int>(res.size()) == 0) {
                 res.emplace_back(point, curdist);
             } else if (static_cast<int>(res.size()) == 1) {
@@ -137,7 +137,7 @@ std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point
     std::pair<cv::Point, cv::Point> res;
     for (int n = static_cast<int>(points.size()), i = 0; i < n; ++i) {
         for (int j = i + 1; j < n; ++j) {
-            double curdist = geometry::getDistance(points[i], points[j]);
+            double curdist = geometry::distance(points[i], points[j]);
             if (curdist > maxdist) {
                 maxdist = curdist;
                 res = {points[i], points[j]};
@@ -148,10 +148,10 @@ std::pair<cv::Point, cv::Point> getFarthestPointPair(const std::vector<cv::Point
 }
 
 cv::Point getClosestPoint(const cv::Point& p, const std::vector<cv::Point>& points) {
-    double closestdist = geometry::getDistance(p, points[0]);
+    double closestdist = geometry::distance(p, points[0]);
     cv::Point closestpoint = points[0];
     for (std::size_t i = 1; i < points.size(); ++i) {
-        double curdist = geometry::getDistance(p, points[i]);
+        double curdist = geometry::distance(p, points[i]);
         if (curdist < closestdist) {
             closestdist = curdist;
             closestpoint = points[i];
