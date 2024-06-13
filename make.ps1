@@ -1,8 +1,8 @@
 clear
 echo "clear"
 
-echo "`nRemove-Item -Path .\build\CMakeCache.txt"
-Remove-Item -Path .\build\CMakeCache.txt
+echo "`nRemove-Item -Path .\build -Recurse -Force"
+Remove-Item -Path .\build -Recurse -Force
 
 echo "`nsource: cmake -S . -B build -G Ninja -D MYSELF=ON"
 cmake -S . -B build -G Ninja -D MYSELF=ON

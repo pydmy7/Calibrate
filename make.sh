@@ -3,8 +3,8 @@
 clear
 echo -e "clear"
 
-echo -e "\nrm build/CMakeCache.txt"
-rm build/CMakeCache.txt
+echo -e "\nrm -rf build"
+rm -rf build
 
 echo -e "\nsource: cmake -S . -B build -G Ninja -D MYSELF=ON"
 cmake -S . -B build -G Ninja -D MYSELF=ON
