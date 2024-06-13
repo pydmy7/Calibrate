@@ -22,7 +22,7 @@ private:
     // static const inline
     const cv::Mat crosskernel_;
     const cv::Mat rectkernel_;
-    std::unordered_map<cornersort::ChessboardType, std::array<int, 5>> chessboardtypequadinfo;
+    std::unordered_map<cornersort::ChessboardType, std::array<int, 5>> chessboardtypequadinfo_;
 
     cv::Mat mat_;
     std::vector<pii> patternsizes_;

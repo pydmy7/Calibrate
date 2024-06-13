@@ -66,7 +66,7 @@ void testAllImage() {
 
         for (int idx = 0; auto&& corners : chessboards) {
             for (auto&& corner : corners) {
-                cv::putText(image, std::to_string(idx++), corner, cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
+                cv::putText(image, fmt::format(".{}", idx++), corner, cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255));
             }
         }
 

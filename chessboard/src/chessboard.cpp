@@ -25,15 +25,15 @@ Chessboard::Chessboard(cv::Mat mat, const std::initializer_list<pii>& patternsiz
     rectkernel_(cv::getStructuringElement(cv::MORPH_RECT, cv::Size{3, 3})) \
 {
     // 2 * 2 = 2 : 4
-    chessboardtypequadinfo[cornersort::ChessboardType::twomultwo][2] = 4;
+    chessboardtypequadinfo_[cornersort::ChessboardType::twomultwo][2] = 4;
     // 3 * 3 = 1 : 2, 2 : 4, 4 : 2
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulthree][1] = 2;
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulthree][2] = 4;
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulthree][4] = 2;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulthree][1] = 2;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulthree][2] = 4;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulthree][4] = 2;
     // 3 * 4 = 1 : 2, 2 : 5, 4 : 3
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulfour][1] = 2;
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulfour][2] = 5;
-    chessboardtypequadinfo[cornersort::ChessboardType::threemulfour][4] = 3;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulfour][1] = 2;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulfour][2] = 5;
+    chessboardtypequadinfo_[cornersort::ChessboardType::threemulfour][4] = 3;
 
     init(mat, patternsizes, cameraposition);
 }
@@ -328,9 +328,9 @@ std::vector<std::vector<cv::Point>> Chessboard::connectQuads(std::vector<std::ve
         if (type == cornersort::ChessboardType::none) {
             return true;
         }
-        if (int linked_one_pointquadcnt = chessboardtypequadinfo[type][1],
-            linked_two_pointquadcnt = chessboardtypequadinfo[type][2],
-            linked_four_pointquadcnt = chessboardtypequadinfo[type][4];
+        if (int linked_one_pointquadcnt = chessboardtypequadinfo_[type][1],
+            linked_two_pointquadcnt = chessboardtypequadinfo_[type][2],
+            linked_four_pointquadcnt = chessboardtypequadinfo_[type][4];
             !(leaderlinkquadcnt[oldidx][1] == linked_one_pointquadcnt \
             && leaderlinkquadcnt[oldidx][2] == linked_two_pointquadcnt \
             && leaderlinkquadcnt[oldidx][4] == linked_four_pointquadcnt)
@@ -418,15 +418,4 @@ bool Chessboard::checkLinePosition(const std::vector<cv::Point>& quada, const st
         }
     }
     return true;
-
-    // std::vector<Line<int>> lines(4);
-    // for (int i = 0; i < 4; ++i) {
-    //     int j = i & 1;
-    //     const auto& quad = i < 2 ? quada : quadb;
-    //     lines[i] = Line((quad[j] + quad[(j + 1) % 4]) / 2, (quad[(j + 2) % 4] + quad[(j + 3) % 4]) / 2);
-    //     auto backup = lines[i];
-    //     lines[i].a = (backup.a - backup.b) * 2 + backup.b;
-    //     lines[i].b = (backup.b - backup.a) * 2 + backup.a;
-    // }
-    // return segmentInPolygon(Line{pa, pb}, getPolygonHull(lines));
 }
