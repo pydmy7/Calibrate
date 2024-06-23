@@ -71,8 +71,8 @@ std::vector<std::vector<cv::Point>> Chessboard::getChessboards() {
     std::vector<std::vector<cv::Point>> chessboards;
 
     std::vector<std::future<std::vector<std::vector<cv::Point>>>> futures;
-    for (int blocksize = 51; blocksize <= 171; blocksize += 20) {
-        for (int constantc = -3; constantc <= 6; constantc += 3) {
+    for (int blocksize = (std::min(mat_.rows, mat_.cols) / 10) | 1; blocksize <= std::min(mat_.rows, mat_.cols); blocksize = (blocksize << 1) | 1) {
+        for (int constantc = -6; constantc <= 6; constantc += 3) {
             futures.emplace_back(std::async([this, blocksize, constantc]() -> std::vector<std::vector<cv::Point>> {
                 return this->getChessboards(blocksize, constantc);
             }));

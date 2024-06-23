@@ -20,6 +20,7 @@ jobs:
 
       - run: 7z x 3rdparty\opencv\bin\opencv_world4100.7z -o3rdparty\opencv\bin
       - run: 7z x 3rdparty\opencv\bin\opencv_world4100d.7z -o3rdparty\opencv\bin
+      - run: 7z x 3rdparty\opencv\bin\opencv_videoio_ffmpeg4100_64.7z -o3rdparty\opencv\bin
       
       - run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
       - run: cmake --build build -j
