@@ -1,32 +1,37 @@
-#### features
+#### Overview
+This project implements the methods and experiments described in the following research article:  
+[Automatic detection of checkerboards on blurred and distorted images](https://ieeexplore.ieee.org/document/4650703), IEEE, 2008.
+
+
+#### Features
 
 - [X] find chessboard corner
 - [X] corner sort
 - [X] async concurrent
 - [X] platform: Linux / Windows
 
-#### requirements
+#### Requirements
 
-`linux`
+`Linux`
 
 ```sh
 sudo apt install clang ninja-build cmake libopencv-dev
 ```
 
-`windows`
+`Windows`
 
 ```powershell
 scoop install llvm ninja cmake
 ```
 
-#### run test demo
+#### Run test demo
 
 ```sh
 ./make.sh  # Linux
 ./make.ps1  # Windows
 ```
 
-#### how to use
+#### How to use
 
 ```bash
 git submodule add https://github.com/pydmy7/Calibrate.git 3rdparty/Calibrate
