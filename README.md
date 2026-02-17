@@ -1,14 +1,14 @@
-#### Overview
+## Overview
 This project implements the methods and experiments described in the following research article:  
 [Automatic detection of checkerboards on blurred and distorted images](https://ieeexplore.ieee.org/document/4650703), IEEE, 2008.
 
 
 #### Features
 
-- [X] find chessboard corner
-- [X] corner sort
-- [X] async concurrent
-- [X] platform: Linux / Windows
+- [X] Find chessboard corner
+- [X] Corner sort
+- [X] Async concurrent
+- [X] Platform: Linux / Windows
 
 #### Requirements
 
